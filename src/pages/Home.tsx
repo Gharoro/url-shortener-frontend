@@ -1,3 +1,11 @@
+import Hero from "../components/Hero";
+import UrlList from "../components/UrlList";
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <section>
+      <Hero />
+      <UrlList />
+    </section>
+  );
 }
