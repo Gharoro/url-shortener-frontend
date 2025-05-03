@@ -5,6 +5,7 @@ export const formatDate = (date: string | Date) => {
     weekday: "long",
     month: "long",
     day: "numeric",
+    year: "numeric",
   }).format(dateObj);
 
   return formatedDate;
