@@ -9,3 +9,26 @@ export interface IUrl {
   searchCount: number;
   status: Status;
 }
+
+export interface PaginationData {
+  totalCount: number;
+  totalPages: number;
+  currentPage: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
+
+export interface FetchQuery {
+  page: number;
+  search?: string;
+}
+
+export interface FetchUrlsResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: {
+    urls: IUrl[];
+    pagination: PaginationData;
+  };
+}
