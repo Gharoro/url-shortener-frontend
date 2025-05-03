@@ -5,7 +5,15 @@ export const formatDate = (date: string | Date) => {
     weekday: "long",
     month: "long",
     day: "numeric",
+    year: "numeric",
   }).format(dateObj);
 
   return formatedDate;
+};
+
+export const getErrorMessage = (error: unknown) => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return "Something went wrong, please try again.";
 };
