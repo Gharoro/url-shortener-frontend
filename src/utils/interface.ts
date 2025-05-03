@@ -32,3 +32,9 @@ export interface FetchUrlsResponse {
     pagination: PaginationData;
   };
 }
+export interface FetchUrlStatResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: IUrl;
+}

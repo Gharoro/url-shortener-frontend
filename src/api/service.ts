@@ -1,4 +1,8 @@
-import { FetchQuery, FetchUrlsResponse } from "../utils/interface";
+import {
+  FetchQuery,
+  FetchUrlsResponse,
+  FetchUrlStatResponse,
+} from "../utils/interface";
 import axiosInstance from "./axiosInstance";
 import { handleApiError } from "./handleApiError";
 
@@ -15,6 +19,19 @@ export const fetchUrls = async (
 
     const { data } = await axiosInstance.get<FetchUrlsResponse>(
       `/url/list?${params.toString()}`
+    );
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const fetchUrlStats = async (
+  code: string
+): Promise<FetchUrlStatResponse> => {
+  try {
+    const { data } = await axiosInstance.get<FetchUrlStatResponse>(
+      `/url/statistic/${code}`
     );
     return data;
   } catch (error) {
