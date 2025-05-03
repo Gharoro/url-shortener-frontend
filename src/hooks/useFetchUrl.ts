@@ -6,9 +6,10 @@ export const useFetchUrls = (query: FetchQuery) => {
   return useQuery({
     queryKey: ["urls", query.page, query.search || ""],
     queryFn: () => fetchUrls(query),
-    retry: 1,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     refetchOnReconnect: true,
+    staleTime: 30000,
+    refetchInterval: 60000,
     placeholderData: keepPreviousData,
     select: (result) => result?.data,
   });

@@ -38,3 +38,12 @@ export interface FetchUrlStatResponse {
   message: string;
   data: IUrl;
 }
+export interface ShortenUrlResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: {
+    shortUrl: string;
+    code: string;
+  };
+}

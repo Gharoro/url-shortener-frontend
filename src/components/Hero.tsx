@@ -1,4 +1,29 @@
+import { useState } from "react";
+import { useShortenUrl } from "../hooks/useShortenUrl";
+import ButtonSpinner from "./ButtonSpinner";
+import { showError, showSuccess } from "../api/responses";
+import { useRefreshUrls } from "../hooks/useRefreshUrls";
+
 export default function Hero() {
+  const [url, setUrl] = useState<string>("");
+  const { mutate, isPending } = useShortenUrl();
+  const refreshUrls = useRefreshUrls();
+
+  const handleShortenUrl = () => {
+    if (!url || url === "") {
+      showError("Please enter a valid url and try again");
+      return;
+    }
+
+    mutate(url, {
+      onSuccess: (response) => {
+        showSuccess(response.message);
+        setUrl("");
+        refreshUrls();
+      },
+    });
+  };
+
   return (
     <div className="mx-auto flex flex-col items-center py-10 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="w-full sm:w-2/3 text-center space-y-6">
@@ -15,9 +40,27 @@ export default function Hero() {
             className="p-4 rounded-md dark:bg-input-gray w-full lg:w-5/6 shadow-sm outline:none focus:outline-none"
             placeholder="Paste your long URL here"
             name="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
           />
-          <button className="bg-primary text-white text-base font-semibold p-4 rounded-md w-full lg:w-1/6 cursor-pointer">
-            Shorten URL
+
+          <button
+            onClick={() => handleShortenUrl()}
+            disabled={isPending || !url}
+            className={`${
+              (isPending || !url) && "opacity-55"
+            } bg-primary text-white text-base font-semibold p-4 rounded-md w-full lg:w-1/6 cursor-pointer space-x-2`}
+          >
+            {isPending ? (
+              <>
+                <ButtonSpinner />
+                <span>Processing...</span>
+              </>
+            ) : (
+              <>
+                <span>Shorten URL</span>
+              </>
+            )}
           </button>
         </div>
       </div>

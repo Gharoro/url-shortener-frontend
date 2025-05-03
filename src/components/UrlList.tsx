@@ -149,6 +149,7 @@ export default function UrlList() {
                     <Link
                       to={shortUrl}
                       className="text-primary break-all text-sm"
+                      target="_blank"
                     >
                       {shortUrl}
                     </Link>

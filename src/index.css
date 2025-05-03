@@ -6,5 +6,8 @@
   --color-hero: #1d2634;
   --color-input-gray: #384152;
   --color-primary: #0065f2;
-  /* --color-dark: #0a1736; */
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
 }

@@ -2,6 +2,7 @@ import {
   FetchQuery,
   FetchUrlsResponse,
   FetchUrlStatResponse,
+  ShortenUrlResponse,
 } from "../utils/interface";
 import axiosInstance from "./axiosInstance";
 import { handleApiError } from "./handleApiError";
@@ -32,6 +33,20 @@ export const fetchUrlStats = async (
   try {
     const { data } = await axiosInstance.get<FetchUrlStatResponse>(
       `/url/statistic/${code}`
+    );
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const shortenUrl = async (url: string): Promise<ShortenUrlResponse> => {
+  try {
+    const { data } = await axiosInstance.post<ShortenUrlResponse>(
+      "/url/encode",
+      {
+        url,
+      }
     );
     return data;
   } catch (error) {
