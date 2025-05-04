@@ -1,3 +1,5 @@
+import { showSuccess } from "../api/responses";
+
 export const formatDate = (date: string | Date) => {
   const dateObj = new Date(date);
 
@@ -16,4 +18,11 @@ export const getErrorMessage = (error: unknown) => {
     return error.message;
   }
   return "Something went wrong, please try again.";
+};
+
+export const copyToClipboard = (text: string, message: string) => {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => showSuccess(message))
+    .catch((err) => console.error("Failed to copy:", err));
 };

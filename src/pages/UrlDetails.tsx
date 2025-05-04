@@ -1,12 +1,10 @@
 import QRCode from "react-qr-code";
 import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { DOMAIN } from "../config/env";
 import { Status } from "../utils/enum";
-import { formatDate } from "../utils/helpers";
+import { copyToClipboard, formatDate } from "../utils/helpers";
 import { useFetchUrlStats } from "../hooks/useFetchUrlStats";
-import { showSuccess } from "../api/responses";
 
 export default function UrlDetails() {
   const { code } = useParams<{ code: string }>();
@@ -38,14 +36,14 @@ export default function UrlDetails() {
                 </h6>
 
                 <div className="flex items-center space-x-2">
-                  <CopyToClipboard
-                    text={shortUrl}
-                    onCopy={() => showSuccess("Short URL copied")}
+                  <button
+                    onClick={() =>
+                      copyToClipboard(shortUrl, "Short URL Copied")
+                    }
+                    className="cursor-pointer bg-gray-300 dark:bg-dark px-4 py-3 rounded-md"
                   >
-                    <button className="cursor-pointer bg-gray-300 dark:bg-dark px-4 py-3 rounded-md">
-                      <i className="fa-solid fa-copy text-base dark:text-white"></i>
-                    </button>
-                  </CopyToClipboard>
+                    <i className="fa-solid fa-copy text-base dark:text-white"></i>
+                  </button>
 
                   <QRCode size={44} value={shortUrl} />
                 </div>

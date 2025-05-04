@@ -3,13 +3,11 @@ import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import debounce from "lodash.debounce";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Status } from "../utils/enum";
-import { formatDate, getErrorMessage } from "../utils/helpers";
+import { copyToClipboard, formatDate, getErrorMessage } from "../utils/helpers";
 import { DOMAIN } from "../config/env";
 import { useFetchUrls } from "../hooks/useFetchUrl";
 import { Pagination } from "./Pagination";
-import { showSuccess } from "../api/responses";
 
 export default function UrlList() {
   const [page, setPage] = useState<number>(1);
@@ -153,14 +151,15 @@ export default function UrlList() {
                     >
                       {shortUrl}
                     </Link>
-                    <CopyToClipboard
-                      text={shortUrl}
-                      onCopy={() => showSuccess("Short URL copied")}
+
+                    <button
+                      onClick={() =>
+                        copyToClipboard(shortUrl, "Short URL Copied")
+                      }
+                      className="cursor-pointer"
                     >
-                      <button className="cursor-pointer">
-                        <i className="fa-solid fa-copy"></i>
-                      </button>
-                    </CopyToClipboard>
+                      <i className="fa-solid fa-copy"></i>
+                    </button>
                   </div>
                 </div>
 
