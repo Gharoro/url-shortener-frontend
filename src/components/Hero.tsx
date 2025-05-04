@@ -49,7 +49,7 @@ export default function Hero() {
             disabled={isPending || !url}
             className={`${
               (isPending || !url) && "opacity-55"
-            } bg-primary text-white text-base font-semibold p-4 rounded-md w-full lg:w-1/6 cursor-pointer space-x-2`}
+            } bg-primary text-white text-base font-semibold p-4 rounded-md w-full lg:w-[150px] cursor-pointer space-x-2`}
           >
             {isPending ? (
               <>
